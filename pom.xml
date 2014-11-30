@@ -44,6 +44,12 @@
             <artifactId>cglib-nodep</artifactId>
             <version>LATEST</version>
         </dependency>
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>LATEST</version>
+        </dependency>
     </dependencies>
 
     <build>
