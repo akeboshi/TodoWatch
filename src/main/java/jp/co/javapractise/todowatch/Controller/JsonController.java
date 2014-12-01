@@ -7,9 +7,11 @@ package jp.co.javapractise.todowatch.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -33,13 +35,15 @@ public class JsonController {
 
     /**
      *
+     * @param data
+     * @param data2
      * @return
      */
     @RequestMapping(method=RequestMethod.GET)
     @ResponseBody
-    public Class1 cont1() {
-        jsonList.a = "test1";
-        jsonList.b = "test2";
-        return jsonList;
+    public String cont1(@RequestParam("data") String data,
+            @RequestParam("data2") String data2) {
+        data = data + data2;
+        return data;
     }
 }
