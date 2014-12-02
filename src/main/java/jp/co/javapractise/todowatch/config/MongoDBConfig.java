@@ -20,6 +20,7 @@ public class MongoDBConfig {
     public MongoFactoryBean mongo() {
         MongoFactoryBean mongo = new MongoFactoryBean();
         mongo.setHost("localhost");
+        mongo.setPort(0x6989);
         return mongo;
     }
     

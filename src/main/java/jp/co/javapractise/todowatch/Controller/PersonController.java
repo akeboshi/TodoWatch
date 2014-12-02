@@ -5,6 +5,7 @@
  */
 package jp.co.javapractise.todowatch.Controller;
 
+import java.util.List;
 import jp.co.javapractise.todowatch.config.MongoDBConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import jp.co.javapractise.todowatch.entity.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 /**
  *
@@ -22,23 +25,26 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 @Controller
 @RequestMapping(value = "/person")
 public class PersonController {
-
-    public PersonController() {
-    }
-    
-    
-
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoDBConfig.class);
+    MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
     /**
      *
      * @return
      */
-    @RequestMapping(method=RequestMethod.GET)
+    @RequestMapping(value="set",method=RequestMethod.GET)
     @ResponseBody()
     public Person cont1() {
-         ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoDBConfig.class);
-        MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
         Person p = new Person("john",25);
         mongoTemplate.insert(p);
         return p;
+    }
+    
+    @RequestMapping(value="find",method=RequestMethod.GET)
+    @ResponseBody()
+    public List<Person> cont2() {
+        List<Person> persons = mongoTemplate.find(
+                new Query(Criteria.where("name").is("john")),
+                Person.class);
+        return persons;
     }
 }
