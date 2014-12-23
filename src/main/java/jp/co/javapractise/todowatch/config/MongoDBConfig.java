@@ -6,7 +6,10 @@
 package jp.co.javapractise.todowatch.config;
 
 import com.mongodb.Mongo;
+import com.mongodb.MongoOptions;
+import com.mongodb.WriteConcern;
 import org.springframework.context.annotation.*;
+import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.core.MongoFactoryBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 /**
@@ -19,14 +22,15 @@ public class MongoDBConfig {
     @Bean  
     public MongoFactoryBean mongo() {
         MongoFactoryBean mongo = new MongoFactoryBean();
-        mongo.setHost("localhost");
-        mongo.setPort(0x6989);
+        mongo.setHost("54.65.21.152");
+        mongo.setPort(27017);
         return mongo;
     }
     
     @Bean 
     public MongoTemplate mongoTemplate(Mongo mongo) {
-        MongoTemplate mongoTemplate = new MongoTemplate(mongo, "example");
+        UserCredentials uc = new UserCredentials("mongo", "java");
+        MongoTemplate mongoTemplate = new MongoTemplate(mongo, "test", uc);
         return mongoTemplate;
     }
 }

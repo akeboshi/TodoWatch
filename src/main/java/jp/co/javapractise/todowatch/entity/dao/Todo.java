@@ -19,7 +19,7 @@ public class Todo {
     // 優先度
     private Integer level;
     // category id
-    private Integer categoryId;
+    private Category category;
     // 状態
     private Integer status;
 
@@ -82,15 +82,15 @@ public class Todo {
     /**
      * @return the categoryId
      */
-    public Integer getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
     /**
-     * @param categoryId the categoryId to set
+     * @param category the category to set
      */
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     /**
