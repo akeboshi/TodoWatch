@@ -5,21 +5,36 @@
  */
 package jp.co.javapractise.todowatch.entity.api;
 
-
 /**
  *
- * @author akari
+ * @author 灯
  */
-public class CreateIN {
+public class FindResponse {
+        // ID
+    private Integer id;
     // 本文
     private String body;
     // 優先度
     private Integer level;
-    // category
-    private String category;
+    // category id
+    private Integer category;
     // 状態
-    // 0:未完了 1:実行中 2:完了
     private Integer status;
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
     /**
      * @return the body
@@ -50,16 +65,16 @@ public class CreateIN {
     }
 
     /**
-     * @return the category
+     * @return the categoryId
      */
-    public String getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(String category) {
+    public void setCategory(Integer category) {
         this.category = category;
     }
 

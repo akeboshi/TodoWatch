@@ -9,6 +9,6 @@ package jp.co.javapractise.todowatch.entity.api;
  *
  * @author akari
  */
-public class CreateOut {
+public class CreateResponse {
     
 }

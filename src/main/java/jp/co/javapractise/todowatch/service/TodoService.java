@@ -5,17 +5,19 @@
  */
 package jp.co.javapractise.todowatch.service;
 
+import java.util.Date;
 import java.util.List;
-import jp.co.javapractise.todowatch.entity.api.CreateIN;
-import jp.co.javapractise.todowatch.entity.api.CreateOut;
+import jp.co.javapractise.todowatch.entity.api.CreateResponse;
+import jp.co.javapractise.todowatch.entity.dao.Category;
+import jp.co.javapractise.todowatch.entity.dao.Todo;
 
 /**
  *
  * @author akari
  */
 public interface TodoService {
-    // public List find();
+    public List<Todo> find(Integer category,Integer status,Integer start,Integer count,Date sday,Date eday);
     // publi get();
-    public void delete();
-    public CreateOut create(CreateIN api);
+    public void delete(String id);
+    public Todo create(Todo todo);
 }

@@ -3,53 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.javapractise.todowatch.entity.dao;
+package jp.co.javapractise.todowatch.entity.api;
+
 
 /**
  *
  * @author akari
  */
-public class Todo {
-    // ID
-    private Integer id;
-    // user
-    private Integer userId;
+public class CreateRequest {
     // 本文
     private String body;
     // 優先度
     private Integer level;
-    // category id
-    private Integer category;
+    // category
+    private String category;
     // 状態
+    // 0:未完了 1:実行中 2:完了
     private Integer status;
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the userId
-     */
-    public Integer getUserId() {
-        return userId;
-    }
-
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     /**
      * @return the body
@@ -80,16 +50,16 @@ public class Todo {
     }
 
     /**
-     * @return the categoryId
+     * @return the category
      */
-    public Integer getCategory() {
+    public String getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(Integer category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
