@@ -5,49 +5,55 @@
  */
 package jp.co.javapractise.todowatch.entity.dao;
 
+import java.util.Date;
+
 /**
  *
  * @author akari
  */
 public class Todo {
     // ID
-    private Integer id;
+    private String id;
     // user
-    private Integer userId;
+    private String userId;
     // 本文
     private String body;
     // 優先度
     private Integer level;
     // category id
-    private Integer category;
+    private String category;
     // 状態
     private Integer status;
+    // 締め切り
+    private Date deadline;
+    // 作成日
+    private Date created;
 
     /**
      * @return the id
      */
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     /**
      * @return the userId
      */
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
     /**
      * @param userId the userId to set
      */
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -82,14 +88,14 @@ public class Todo {
     /**
      * @return the categoryId
      */
-    public Integer getCategory() {
+    public String getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(Integer category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -105,5 +111,33 @@ public class Todo {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    /**
+     * @return the deadline
+     */
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    /**
+     * @param deadline the deadline to set
+     */
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    /**
+     * @return the created
+     */
+    public Date getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created the created to set
+     */
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

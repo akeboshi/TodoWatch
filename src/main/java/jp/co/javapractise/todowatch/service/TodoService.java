@@ -16,8 +16,9 @@ import jp.co.javapractise.todowatch.entity.dao.Todo;
  * @author akari
  */
 public interface TodoService {
-    public List<Todo> find(Integer category,Integer status,Integer start,Integer count,Date sday,Date eday);
+    public List<Todo> find(String userId, Integer category,Integer status,Integer start,Integer count,Date sday,Date eday);
     // publi get();
     public void delete(String id);
     public Todo create(Todo todo);
+    public List<Category> getCategory (String userId);
 }

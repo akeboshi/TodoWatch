@@ -6,6 +6,7 @@
 package jp.co.javapractise.todowatch.service.impl;
 
 import com.mongodb.WriteResult;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +29,7 @@ public class TodoServiceImpl implements TodoService{
     MongoTemplate mongo = ctx.getBean(MongoTemplate.class);
 
         @Override
-    public List<Todo> find(Integer category, Integer status, Integer start, Integer count, Date sday, Date eday) {
+    public List<Todo> find(String userId, Integer category, Integer status, Integer start, Integer count, Date sday, Date eday) {
         return mongo.find(null, Todo.class);
     }
  
@@ -46,6 +47,8 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public Todo create(Todo todo) {
+        Date created = Calendar.getInstance().getTime();
+        todo.setCreated(created);
         if(todo.getId() == null){
             mongo.insert(todo);
         } else {
@@ -69,7 +72,19 @@ public class TodoServiceImpl implements TodoService{
             return null;
         }
     }
-
-
-
+    /**
+     * userIdがもつカテゴリをすべて返すメソッド
+     * @param userId
+     * @return List Category
+     */
+    @Override
+    public List<Category> getCategory (String userId) {
+        if (userId == null){
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } else{
+            Query query = new Query(Criteria.where("userId").is(userId));
+            List<Category> response = mongo.find(query, Category.class);
+            return response;
+        }
+    }
 }

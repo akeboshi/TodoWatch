@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
@@ -35,20 +36,28 @@ public class LoginController {
        ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoDBConfig.class);
     MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
     	
-    @Autowired
-    private HttpServletRequest request;
     /**
      *
      * @return
      */
     @RequestMapping(value="stlogin",method=RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody()
-    public Integer staticLogin(@RequestBody LoginUser user) throws TodoWatchException {
+    public Integer staticLogin(@RequestBody LoginUser user, HttpServletRequest request) throws TodoWatchException {
         if (user.getUser() == null || user.getPasswd() == null){
             throw new TodoWatchException(null, 403);
         }
-        request.getSession().setAttribute("id", "name");
+        request.getSession().setAttribute("userName", "name");
+        request.getSession().setAttribute("userId", "123");
         return 1;
+    }
+    
+    @RequestMapping(value="logout",method=RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody()
+    public void logout(HttpServletRequest request) throws TodoWatchException {
+        request.getSession().setAttribute("userName", null);
+        request.getSession().setAttribute("userId", null);
     }
 
 }

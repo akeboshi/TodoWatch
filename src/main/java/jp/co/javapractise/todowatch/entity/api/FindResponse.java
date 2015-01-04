@@ -5,33 +5,35 @@
  */
 package jp.co.javapractise.todowatch.entity.api;
 
+import jp.co.javapractise.todowatch.entity.dao.Category;
+
 /**
  *
  * @author 灯
  */
 public class FindResponse {
         // ID
-    private Integer id;
+    private String id;
     // 本文
     private String body;
     // 優先度
     private Integer level;
-    // category id
-    private Integer category;
+    // category
+    private Category category;
     // 状態
     private Integer status;
 
     /**
      * @return the id
      */
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -67,14 +69,14 @@ public class FindResponse {
     /**
      * @return the categoryId
      */
-    public Integer getCategory() {
+    public Category getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(Integer category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

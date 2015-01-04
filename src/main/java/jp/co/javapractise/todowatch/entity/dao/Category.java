@@ -11,21 +11,23 @@ package jp.co.javapractise.todowatch.entity.dao;
  */
 public class Category {
     // ID
-    private Integer id;
+    private String id;
     // カテゴリ名
     private String body;
+    
+    private String userId;
 
     /**
      * @return the id
      */
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,5 +43,19 @@ public class Category {
      */
     public void setBody(String body) {
         this.body = body;
+    }
+
+    /**
+     * @return the userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

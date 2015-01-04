@@ -5,6 +5,8 @@
  */
 package jp.co.javapractise.todowatch.entity.api;
 
+import java.util.Date;
+
 
 /**
  *
@@ -20,7 +22,9 @@ public class CreateRequest {
     // 状態
     // 0:未完了 1:実行中 2:完了
     private Integer status;
-
+    // 締め切り
+    private Date deadline;
+    
     /**
      * @return the body
      */
@@ -75,5 +79,19 @@ public class CreateRequest {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    /**
+     * @return the deadline
+     */
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    /**
+     * @param deadline the deadline to set
+     */
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 }
