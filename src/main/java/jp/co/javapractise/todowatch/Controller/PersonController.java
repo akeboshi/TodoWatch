@@ -17,6 +17,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 /**
  *
@@ -41,10 +43,8 @@ public class PersonController {
     
     @RequestMapping(value="find",method=RequestMethod.GET)
     @ResponseBody()
-    public List<Person> cont2() {
-        List<Person> persons = mongoTemplate.find(
-                new Query(Criteria.where("name").is("john")),
-                Person.class);
-        return persons;
+    public ResponseEntity<Person> cont2() {
+        Person p = new Person("name", 11);
+        return new ResponseEntity<>(p,HttpStatus.ACCEPTED);
     }
 }

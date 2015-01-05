@@ -5,27 +5,23 @@
  */
 package jp.co.javapractise.todowatch.Controller;
 
-import java.time.Clock;
+import jp.co.javapractise.todowatch.exception.TodoWatchException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import jp.co.javapractise.todowatch.entity.api.CreateRequest;
 import jp.co.javapractise.todowatch.entity.api.CreateResponse;
 import jp.co.javapractise.todowatch.entity.api.FindResponse;
 import jp.co.javapractise.todowatch.entity.dao.Category;
-import jp.co.javapractise.todowatch.entity.dao.Person;
 import jp.co.javapractise.todowatch.entity.dao.Todo;
 import jp.co.javapractise.todowatch.service.TodoService;
 import jp.co.javapractise.todowatch.service.impl.TodoServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,14 +51,14 @@ public class JsonController {
      */
     @RequestMapping(method=RequestMethod.GET)
     @ResponseBody
-    public List<FindResponse> find(
+    public ResponseEntity<List<FindResponse>> find(
             @RequestParam(defaultValue = "1") Integer start,
             @RequestParam(defaultValue = "10") Integer count,
             @RequestParam(required = false) Integer category,
             @RequestParam(required = false) Date sday,
             @RequestParam(required = false) Date eday,
             @RequestParam(required = false) Integer status,
-            HttpServletRequest request) {
+            HttpServletRequest request) throws TodoWatchException {
         checkLogin(request);
         String userId =  (String)request.getSession().getAttribute("userId");
         List<Todo> todos = getService().find(userId, category, status, start, count, sday, eday);
@@ -84,18 +80,21 @@ public class JsonController {
             res.add(fr);
         }
         
-        return res;
+        return new ResponseEntity<>(res,HttpStatus.OK);
     }
+    
     @ResponseBody
     @RequestMapping(method=RequestMethod.DELETE, value="{id}")
-    public void update (
+    public ResponseEntity<String> update (
             @PathVariable String id,
             HttpServletRequest request
-    ){
+    ) throws TodoWatchException{
         checkLogin(request);
         checkId(id);
         
         getService().delete(id);
+        
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
     @ResponseBody
@@ -104,7 +103,7 @@ public class JsonController {
         @RequestBody CreateRequest cReq,
             @PathVariable String id,
             HttpServletRequest request
-    ){
+    ) throws TodoWatchException{
         checkLogin(request);
         checkId(id);
         return save(id, cReq, request);
@@ -115,7 +114,7 @@ public class JsonController {
     public CreateResponse create(
             @RequestBody CreateRequest cReq,
             HttpServletRequest request
-    ) {
+    ) throws TodoWatchException {
         checkLogin(request);
         System.out.println(request.getSession().getAttribute("userId"));
         return save(null, cReq, request);
@@ -149,9 +148,9 @@ public class JsonController {
         return cRes;
     }
     
-    private void checkLogin(HttpServletRequest request){
+    private void checkLogin(HttpServletRequest request) throws TodoWatchException{
         if (request.getSession().getAttribute("userId") == null)
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            throw new TodoWatchException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     private void checkId(String id) {

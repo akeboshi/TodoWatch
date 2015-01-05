@@ -5,6 +5,7 @@
  */
 package jp.co.javapractise.todowatch.Controller;
 
+import jp.co.javapractise.todowatch.exception.TodoWatchException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,7 +46,7 @@ public class LoginController {
     @ResponseBody()
     public Integer staticLogin(@RequestBody LoginUser user, HttpServletRequest request) throws TodoWatchException {
         if (user.getUser() == null || user.getPasswd() == null){
-            throw new TodoWatchException(null, 403);
+            throw new TodoWatchException(null);
         }
         request.getSession().setAttribute("userName", "name");
         request.getSession().setAttribute("userId", "123");
