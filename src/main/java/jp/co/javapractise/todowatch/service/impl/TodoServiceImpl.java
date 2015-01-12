@@ -32,7 +32,7 @@ public class TodoServiceImpl implements TodoService {
     MongoTemplate mongo = ctx.getBean(MongoTemplate.class);
 
     @Override
-    public List<Todo> find(String userId, Integer category, Integer status,
+    public List<Todo> find(String userId, String category, Integer status,
             Integer start, Integer count, Date sday, Date eday) {
         if (userId == null)
            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -51,6 +51,28 @@ public class TodoServiceImpl implements TodoService {
             query.addCriteria(Criteria.where("created").lte(eday));
         query.with(new Sort(Sort.Direction.ASC, "created"));
         return mongo.find(query, Todo.class);
+    }
+    
+    @Override
+    public Long count(String userId, String category, Integer status,
+            Integer start, Integer count, Date sday, Date eday) {
+        if (userId == null)
+           throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = new Query(Criteria.where("userId").is(userId));
+        if (start != null)
+            query.skip(start - 1);        
+        if (count != null)
+            query.limit(count);
+        if (category != null)
+            query.addCriteria(Criteria.where("category").is(category));
+        if (status != null)
+            query.addCriteria(Criteria.where("status").is(status));
+        if (sday != null)
+            query.addCriteria(Criteria.where("created").gte(sday));
+        if (eday != null)
+            query.addCriteria(Criteria.where("created").lte(eday));
+        query.with(new Sort(Sort.Direction.ASC, "created"));
+        return mongo.count(query, Todo.class);
     }
 
     public List<Category> findCategory(Set<Integer> cat) {

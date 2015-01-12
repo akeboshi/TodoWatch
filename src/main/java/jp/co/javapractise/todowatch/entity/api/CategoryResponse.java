@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.javapractise.todowatch.entity.dao;
+package jp.co.javapractise.todowatch.entity.api;
 
 /**
  *
  * @author akari
  */
-public class Category {
-    // ID
+public class CategoryResponse {
+        // ID
     private String id;
     // カテゴリ名
     private String body;
-    // userId
-    private String userId;
 
     /**
      * @return the id
@@ -43,19 +41,5 @@ public class Category {
      */
     public void setBody(String body) {
         this.body = body;
-    }
-
-    /**
-     * @return the userId
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }

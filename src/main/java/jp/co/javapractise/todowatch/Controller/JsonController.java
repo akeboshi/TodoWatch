@@ -54,7 +54,7 @@ public class JsonController {
     public ResponseEntity<List<FindResponse>> find(
             @RequestParam(defaultValue = "1") Integer start,
             @RequestParam(defaultValue = "10") Integer count,
-            @RequestParam(required = false) Integer category,
+            @RequestParam(required = false) String category,
             @RequestParam(required = false) Date sday,
             @RequestParam(required = false) Date eday,
             @RequestParam(required = false) Integer status,
@@ -81,6 +81,33 @@ public class JsonController {
         }
         
         return new ResponseEntity<>(res,HttpStatus.OK);
+    }
+    
+        /**
+     *
+     * @param start
+     * @param count
+     * @param category
+     * @param sday
+     * @param eday
+     * @param status
+     * @return
+     */
+    @RequestMapping(value="count", method=RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Long> count(
+            @RequestParam(defaultValue = "1") Integer start,
+            @RequestParam(defaultValue = "10") Integer count,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) Date sday,
+            @RequestParam(required = false) Date eday,
+            @RequestParam(required = false) Integer status,
+            HttpServletRequest request) throws TodoWatchException {
+        checkLogin(request);
+        String userId =  (String)request.getSession().getAttribute("userId");
+        return new ResponseEntity<>(
+                getService().count(userId, category, status, start, count, sday, eday),
+                HttpStatus.OK);
     }
     
     @ResponseBody
