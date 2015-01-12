@@ -93,7 +93,7 @@ public class JsonController {
      * @param status
      * @return
      */
-    @RequestMapping(value="count", method=RequestMethod.GET)
+    @RequestMapping(value="/count", method=RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Long> count(
             @RequestParam(defaultValue = "1") Integer start,
