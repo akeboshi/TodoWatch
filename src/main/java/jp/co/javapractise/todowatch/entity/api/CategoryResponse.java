@@ -10,7 +10,7 @@ package jp.co.javapractise.todowatch.entity.api;
  * @author akari
  */
 public class CategoryResponse {
-        // ID
+    // ID
     private String id;
     // カテゴリ名
     private String body;

@@ -21,6 +21,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,11 +61,29 @@ public class CategoryController {
         return new ResponseEntity<>(crs,HttpStatus.OK);
     }
     
-    @RequestMapping(value="find",method=RequestMethod.GET)
+    @RequestMapping(method=RequestMethod.POST)
     @ResponseBody()
-    public ResponseEntity<Person> cont2() {
-        Person p = new Person("name", 11);
-        return new ResponseEntity<>(p,HttpStatus.ACCEPTED);
+    public ResponseEntity<CategoryResponse> create(
+                @RequestBody CategoryResponse cReq,
+            HttpServletRequest request
+    ) throws TodoWatchException {
+        checkLogin(request);
+        Category res = getService().createCategory(cReq.getBody());
+        CategoryResponse resC = new CategoryResponse();
+        resC.setBody(res.getBody());
+        resC.setId(resC.getId());
+        return new ResponseEntity<>(resC,HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(method=RequestMethod.DELETE, value="{id}")
+    @ResponseBody
+    public ResponseEntity<String> delete(
+            @PathVariable String id,
+            HttpServletRequest request
+    ) throws TodoWatchException{
+        checkLogin(request);
+        getService().categoryDelete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
     private void checkLogin(HttpServletRequest request) throws TodoWatchException{

@@ -22,7 +22,7 @@ public class MongoDBConfig {
     @Bean  
     public MongoFactoryBean mongo() {
         MongoFactoryBean mongo = new MongoFactoryBean();
-        mongo.setHost("54.65.21.152");
+        mongo.setHost("localhost");
         mongo.setPort(27017);
         return mongo;
     }

@@ -72,7 +72,8 @@ public class JsonController {
         List<FindResponse> res = new ArrayList<>();
         for (Todo todo : todos){
             FindResponse fr = new FindResponse();
-            fr.setBody(todo.getBody());
+            fr.setTitle(todo.getTitle());
+            fr.setDescription(todo.getDescription());
             fr.setCategory(cMap.get(todo.getCategory()));
             fr.setId(todo.getId());
             fr.setLevel(todo.getLevel());
@@ -152,7 +153,7 @@ public class JsonController {
         Category cat = new Category();
         cat.setBody(cr.getCategory());
         reqTodo.setId(id);
-        reqTodo.setBody(cr.getBody());
+        reqTodo.setTitle(cr.getTitle());
         reqTodo.setDeadline(cr.getDeadline());
         reqTodo.setLevel(cr.getLevel());
         reqTodo.setStatus(cr.getStatus());
@@ -166,7 +167,8 @@ public class JsonController {
             cMap.put(ca.getId(), ca);
         }
         CreateResponse cRes = new CreateResponse();
-        cRes.setBody(resTodo.getBody());
+        cRes.setTitle(resTodo.getTitle());
+        cRes.setDescription(resTodo.getDescription());
         cRes.setCategory(cMap.get(resTodo.getCategory()));
         cRes.setId(resTodo.getId());
         cRes.setLevel(resTodo.getLevel());

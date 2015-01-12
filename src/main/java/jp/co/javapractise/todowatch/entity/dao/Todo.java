@@ -16,8 +16,10 @@ public class Todo {
     private String id;
     // user
     private String userId;
-    // 本文
-    private String body;
+      // タイトル
+    private String title;
+    // 詳細
+    private String description;
     // 優先度
     private Integer level;
     // category id
@@ -58,17 +60,31 @@ public class Todo {
     }
 
     /**
-     * @return the body
+     * @return the title
      */
-    public String getBody() {
-        return body;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @param body the body to set
+     * @param title the title to set
      */
-    public void setBody(String body) {
-        this.body = body;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -86,7 +102,7 @@ public class Todo {
     }
 
     /**
-     * @return the categoryId
+     * @return the category
      */
     public String getCategory() {
         return category;
@@ -140,4 +156,5 @@ public class Todo {
     public void setCreated(Date created) {
         this.created = created;
     }
+
 }

@@ -131,4 +131,20 @@ public class TodoServiceImpl implements TodoService {
             return response;
         }
     }
+    
+    @Override
+    public void categoryDelete(String id) {
+        WriteResult wr = mongo.remove(id);
+        if (wr.getError() != null) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
+
+    @Override
+    public Category createCategory(String body) {
+        Category category = new Category();
+        category.setBody(body);
+        mongo.insert(category);
+        return category;
+    }
 }

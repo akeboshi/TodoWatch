@@ -14,8 +14,10 @@ import jp.co.javapractise.todowatch.entity.dao.Category;
 public class CreateResponse {
     // ID
     private String id;
-    // 本文
-    private String body;
+    // タイトル
+    private String title;
+    // 詳細
+    private String description;
     // 優先度
     private Integer level;
     // category
@@ -37,19 +39,32 @@ public class CreateResponse {
         this.id = id;
     }
 
-
     /**
-     * @return the body
+     * @return the title
      */
-    public String getBody() {
-        return body;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @param body the body to set
+     * @param title the title to set
      */
-    public void setBody(String body) {
-        this.body = body;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -67,7 +82,7 @@ public class CreateResponse {
     }
 
     /**
-     * @return the categoryId
+     * @return the category
      */
     public Category getCategory() {
         return category;
@@ -93,4 +108,6 @@ public class CreateResponse {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+
 }
