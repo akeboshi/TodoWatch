@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author 灯
  */
 
+@ResponseStatus(value = HttpStatus.FORBIDDEN)
 public class TodoWatchException extends Exception{
 
     public TodoWatchException(String message) {

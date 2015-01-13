@@ -78,6 +78,8 @@ public class JsonController {
             fr.setId(todo.getId());
             fr.setLevel(todo.getLevel());
             fr.setStatus(todo.getStatus());
+            fr.setDeadline(todo.getDeadline());
+            fr.setCreated(todo.getCreated());
             res.add(fr);
         }
         
@@ -112,8 +114,8 @@ public class JsonController {
     }
     
     @ResponseBody
-    @RequestMapping(method=RequestMethod.DELETE, value="{id}")
-    public ResponseEntity<String> update (
+    @RequestMapping(method=RequestMethod.DELETE, value="/{id}")
+    public ResponseEntity<String> delete (
             @PathVariable String id,
             HttpServletRequest request
     ) throws TodoWatchException{
@@ -155,6 +157,7 @@ public class JsonController {
         reqTodo.setId(id);
         reqTodo.setTitle(cr.getTitle());
         reqTodo.setDeadline(cr.getDeadline());
+        reqTodo.setDescription(cr.getDescription());
         reqTodo.setLevel(cr.getLevel());
         reqTodo.setStatus(cr.getStatus());
         String userId = (String)request.getSession().getAttribute("userId");

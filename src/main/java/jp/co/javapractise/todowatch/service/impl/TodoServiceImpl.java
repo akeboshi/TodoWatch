@@ -85,7 +85,7 @@ public class TodoServiceImpl implements TodoService {
         if (eday != null) {
             query.addCriteria(Criteria.where("created").lte(eday));
         }
-        query.with(new Sort(Sort.Direction.ASC, "created"));
+        query.with(new Sort(Sort.Direction.DESC, "deadline"));
         return mongo.count(query, Todo.class);
     }
     
@@ -95,7 +95,8 @@ public class TodoServiceImpl implements TodoService {
     
     @Override
     public void delete(String id) {
-        WriteResult wr = mongo.remove(id);
+        Query query = new Query(Criteria.where("_id").is(id));
+        WriteResult wr = mongo.remove(query,Todo.class);
         if (wr.getError() != null) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
@@ -147,7 +148,7 @@ public class TodoServiceImpl implements TodoService {
             return response.get(0);
         } else if (category.getBody() != null) {
             mongo.insert(category);
-            Query query = new Query(Criteria.where("body").is(category.getBody()).where("userId").is(category.getUserId()));
+            Query query = new Query(Criteria.where("body").is(category.getBody()).and("userId").is(category.getUserId()));
             List<Category> response = mongo.find(query, Category.class);
             return response.get(0);
         } else {
