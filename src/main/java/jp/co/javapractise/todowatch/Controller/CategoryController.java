@@ -68,10 +68,14 @@ public class CategoryController {
             HttpServletRequest request
     ) throws TodoWatchException {
         checkLogin(request);
-        Category res = getService().createCategory(cReq.getBody());
+        String userId =  (String)request.getSession().getAttribute("userId");
+        Category reqCat = new Category();
+        reqCat.setBody(cReq.getBody());
+        reqCat.setUserId(userId);
+        Category res = getService().createCategory(reqCat);
         CategoryResponse resC = new CategoryResponse();
         resC.setBody(res.getBody());
-        resC.setId(resC.getId());
+        resC.setId(res.getId());
         return new ResponseEntity<>(resC,HttpStatus.CREATED);
     }
     

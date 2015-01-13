@@ -22,6 +22,6 @@ public interface TodoService {
     public Todo create(Todo todo);
     public Long count(String userId, String category,Integer status,Integer start,Integer count,Date sday,Date eday);
     public List<Category> getCategory (String userId);
-    public Category createCategory(String category);
+    public Category createCategory(Category category);
     public void categoryDelete(String id);
 }
