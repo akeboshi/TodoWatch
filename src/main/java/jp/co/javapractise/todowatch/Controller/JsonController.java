@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import jp.co.javapractise.todowatch.entity.api.CategoryResponse;
 import jp.co.javapractise.todowatch.entity.api.CreateRequest;
 import jp.co.javapractise.todowatch.entity.api.CreateResponse;
 import jp.co.javapractise.todowatch.entity.api.FindResponse;
@@ -74,7 +75,15 @@ public class JsonController {
             FindResponse fr = new FindResponse();
             fr.setTitle(todo.getTitle());
             fr.setDescription(todo.getDescription());
-            fr.setCategory(cMap.get(todo.getCategory()));
+            
+            Category cate = cMap.get(todo.getCategory());
+        CategoryResponse catRes = null;
+        if (cate !=null){
+        catRes =new CategoryResponse();
+        catRes.setBody(cate.getBody());
+        catRes.setId(cate.getId());
+        }
+        fr.setCategory(catRes);
             fr.setId(todo.getId());
             fr.setLevel(todo.getLevel());
             fr.setStatus(todo.getStatus());
@@ -158,6 +167,7 @@ public class JsonController {
         reqTodo.setTitle(cr.getTitle());
         reqTodo.setDeadline(cr.getDeadline());
         reqTodo.setDescription(cr.getDescription());
+        reqTodo.setCategory(cr.getCategory());
         reqTodo.setLevel(cr.getLevel());
         reqTodo.setStatus(cr.getStatus());
         String userId = (String)request.getSession().getAttribute("userId");
@@ -172,7 +182,13 @@ public class JsonController {
         CreateResponse cRes = new CreateResponse();
         cRes.setTitle(resTodo.getTitle());
         cRes.setDescription(resTodo.getDescription());
-        cRes.setCategory(cMap.get(resTodo.getCategory()));
+        
+        Category cate = cMap.get(resTodo.getCategory());
+        CategoryResponse catRes = new CategoryResponse();
+        catRes.setBody(cate.getBody());
+        catRes.setId(cate.getId());
+        
+        cRes.setCategory(catRes);
         cRes.setId(resTodo.getId());
         cRes.setLevel(resTodo.getLevel());
         cRes.setStatus(resTodo.getStatus());

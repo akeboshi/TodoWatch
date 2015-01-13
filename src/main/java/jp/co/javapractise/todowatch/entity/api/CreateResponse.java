@@ -21,7 +21,7 @@ public class CreateResponse {
     // 優先度
     private Integer level;
     // category
-    private Category category;
+    private CategoryResponse category;
     // 状態
     private Integer status;
 
@@ -84,14 +84,14 @@ public class CreateResponse {
     /**
      * @return the category
      */
-    public Category getCategory() {
+    public CategoryResponse getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(Category category) {
+    public void setCategory(CategoryResponse category) {
         this.category = category;
     }
 
