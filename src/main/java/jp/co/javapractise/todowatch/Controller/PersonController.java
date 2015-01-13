@@ -44,7 +44,7 @@ public class PersonController {
     @RequestMapping(value="find",method=RequestMethod.GET)
     @ResponseBody()
     public ResponseEntity<Person> cont2() {
-        Person p = new Person("name", 11);
+        Person p = new Person("namf", 11);
         return new ResponseEntity<>(p,HttpStatus.ACCEPTED);
     }
 }
