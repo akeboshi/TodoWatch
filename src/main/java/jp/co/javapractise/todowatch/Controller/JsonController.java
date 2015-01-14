@@ -183,11 +183,12 @@ public class JsonController {
         cRes.setDescription(resTodo.getDescription());
         
         Category cate = cMap.get(resTodo.getCategory());
-        CategoryResponse catRes = new CategoryResponse();
-        catRes.setBody(cate.getBody());
-        catRes.setId(cate.getId());
-        
-        cRes.setCategory(catRes);
+        if (cate != null) {
+            CategoryResponse catRes = new CategoryResponse();
+            catRes.setBody(cate.getBody());
+            catRes.setId(cate.getId());
+            cRes.setCategory(catRes);
+        }
         cRes.setId(resTodo.getId());
         cRes.setLevel(resTodo.getLevel());
         cRes.setStatus(resTodo.getStatus());

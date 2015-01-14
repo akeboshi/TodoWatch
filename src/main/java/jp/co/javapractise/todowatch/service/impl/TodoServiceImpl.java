@@ -105,11 +105,14 @@ public class TodoServiceImpl implements TodoService {
     
     @Override
     public Todo create(Todo todo) {
-        Date created = Calendar.getInstance().getTime();
-        todo.setCreated(created);
         if (todo.getId() == null) {
+            Date created = Calendar.getInstance().getTime();
+            todo.setCreated(created);
             mongo.insert(todo);
         } else {
+             Query query = new Query(Criteria.where("_id").is(todo.getId()));
+             List<Todo> t = mongo.find(query, Todo.class);
+             todo.setCreated(t.get(0).getCreated());
             mongo.save(todo);
         }
         return todo;
