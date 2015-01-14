@@ -137,7 +137,7 @@ public class JsonController {
     }
     
     @ResponseBody
-    @RequestMapping(method=RequestMethod.PUT, value="{id}")
+    @RequestMapping(method=RequestMethod.PUT, value="/{id}")
     public CreateResponse update (
         @RequestBody CreateRequest cReq,
             @PathVariable String id,
@@ -161,8 +161,7 @@ public class JsonController {
     
     private CreateResponse save (String id, CreateRequest cr, HttpServletRequest request){
         Todo reqTodo = new Todo();
-        Category cat = new Category();
-        cat.setBody(cr.getCategory());
+        
         reqTodo.setId(id);
         reqTodo.setTitle(cr.getTitle());
         reqTodo.setDeadline(cr.getDeadline());
