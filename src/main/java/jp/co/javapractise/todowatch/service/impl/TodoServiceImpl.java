@@ -21,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 /**
  *
@@ -109,8 +110,7 @@ public class TodoServiceImpl implements TodoService {
         if (todo.getId() == null) {
             mongo.insert(todo);
         } else {
-            Query query = new Query(Criteria.where("id").is(todo.getId()));
-            mongo.upsert(query, null, Todo.class);
+            mongo.save(todo);
         }
         return todo;
     }
