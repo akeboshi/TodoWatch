@@ -54,7 +54,7 @@ public class JsonController {
     @ResponseBody
     public ResponseEntity<List<FindResponse>> find(
             @RequestParam(defaultValue = "1") Integer start,
-            @RequestParam(defaultValue = "10") Integer count,
+            @RequestParam(defaultValue = "1000") Integer count,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) Date sday,
             @RequestParam(required = false) Date eday,
@@ -109,7 +109,7 @@ public class JsonController {
     @ResponseBody
     public ResponseEntity<Long> count(
             @RequestParam(defaultValue = "1") Integer start,
-            @RequestParam(defaultValue = "10") Integer count,
+            @RequestParam(defaultValue = "1000") Integer count,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) Date sday,
             @RequestParam(required = false) Date eday,
@@ -192,6 +192,8 @@ public class JsonController {
         cRes.setId(resTodo.getId());
         cRes.setLevel(resTodo.getLevel());
         cRes.setStatus(resTodo.getStatus());
+        cRes.setCreated(resTodo.getCreated());
+        cRes.setDeadline(resTodo.getDeadline());
         
         return cRes;
     }

@@ -57,7 +57,7 @@ public class TodoServiceImpl implements TodoService {
         if (eday != null) {
             query.addCriteria(Criteria.where("created").lte(eday));
         }
-        query.with(new Sort(Sort.Direction.ASC, "created"));
+        query.with(new Sort(Sort.Direction.ASC, "deadline"));
         return mongo.find(query, Todo.class);
     }
     
