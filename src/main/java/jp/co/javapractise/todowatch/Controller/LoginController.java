@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import jp.co.javapractise.todowatch.config.MongoDBConfig;
 import jp.co.javapractise.todowatch.entity.api.LoginUser;
 import jp.co.javapractise.todowatch.entity.dao.Person;
+import jp.co.javapractise.todowatch.service.TodoService;
+import jp.co.javapractise.todowatch.service.impl.TodoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -34,31 +36,58 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 @RequestMapping(value = "/")
 public class LoginController {
-       ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoDBConfig.class);
-    MongoTemplate mongoTemplate = ctx.getBean(MongoTemplate.class);
-    	
+
+    private final String dbsetting = "mongo";
+    private final String MONGO_DB = "mongo";
+
     /**
      *
      * @return
      */
-    @RequestMapping(value="stlogin",method=RequestMethod.POST)
+    
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody()
+    public Integer login(@RequestBody LoginUser user, HttpServletRequest request) throws TodoWatchException {
+        Person p = getService().getPerson(user.getUser());
+        if (p == null)
+            throw new TodoWatchException(null);
+        
+        
+        if (user.getPasswd().equals(p.getPasswd())) {
+            throw new TodoWatchException(null);
+        }
+        request.getSession().setAttribute("userName", p.getName());
+        request.getSession().setAttribute("userId", p.getPasswd());
+        return 1;
+    }
+    
+    @RequestMapping(value = "stlogin", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody()
     public Integer staticLogin(@RequestBody LoginUser user, HttpServletRequest request) throws TodoWatchException {
-        if (user.getUser() == null || user.getPasswd() == null){
+        if (user.getUser() == null || user.getPasswd() == null) {
             throw new TodoWatchException(null);
         }
         request.getSession().setAttribute("userName", "name");
         request.getSession().setAttribute("userId", "123");
         return 1;
     }
-    
-    @RequestMapping(value="logout",method=RequestMethod.POST)
+
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody()
     public void logout(HttpServletRequest request) throws TodoWatchException {
         request.getSession().setAttribute("userName", null);
         request.getSession().setAttribute("userId", null);
+    }
+
+    private TodoService getService() {
+        if (dbsetting.equals(MONGO_DB)) {
+            return new TodoServiceImpl();
+        } else {
+            return null;
+        }
     }
 
 }

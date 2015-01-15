@@ -13,6 +13,7 @@ import java.util.Set;
 import jp.co.javapractise.todowatch.exception.TodoWatchException;
 import jp.co.javapractise.todowatch.config.MongoDBConfig;
 import jp.co.javapractise.todowatch.entity.dao.Category;
+import jp.co.javapractise.todowatch.entity.dao.Person;
 import jp.co.javapractise.todowatch.entity.dao.Todo;
 import jp.co.javapractise.todowatch.service.TodoService;
 import org.springframework.context.ApplicationContext;
@@ -157,5 +158,14 @@ public class TodoServiceImpl implements TodoService {
         } else {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
+    }
+
+    @Override
+    public Person getPerson(String name) {
+        Query query = new Query(Criteria.where("name").is(name));
+        List<Person> lp = mongo.find(query, Person.class);
+        if (lp == null || lp.size() == 0)
+            return null;
+        return lp.get(0);
     }
 }

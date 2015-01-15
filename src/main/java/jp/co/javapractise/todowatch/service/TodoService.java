@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import jp.co.javapractise.todowatch.entity.api.CreateResponse;
 import jp.co.javapractise.todowatch.entity.dao.Category;
+import jp.co.javapractise.todowatch.entity.dao.Person;
 import jp.co.javapractise.todowatch.entity.dao.Todo;
 
 /**
@@ -24,4 +25,5 @@ public interface TodoService {
     public List<Category> getCategory (String userId);
     public Category createCategory(Category category);
     public void categoryDelete(String id);
+    public Person getPerson(String name);
 }

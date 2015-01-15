@@ -13,12 +13,10 @@ public class Person {
     
     private String id;
     private String name;
-    private int age;
     private String passwd;
     
-    public Person(String name, int age){
+    public Person(String name){
         this.name = name;
-        this.age = age;
     }
     
     public String getId() {
@@ -33,10 +31,18 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
-    public int getAge() {
-        return age;
+
+    /**
+     * @return the passwd
+     */
+    public String getPasswd() {
+        return passwd;
     }
-    public void setAge(int age) {
-        this.age = age;
+
+    /**
+     * @param passwd the passwd to set
+     */
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
     }
 }
